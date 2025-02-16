@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Event Management System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="bg-[#F1EDEE]">
+    <header class="bg-blue-600 text-white p-4">
+        <nav class="flex justify-between items-center w-full p-4 bg-blue-600 text-white ">
+            <a href="{% url 'dashboard' %} ">
+                <img class="h-full w-full border rounded-full " 
+                     src="https://i.ibb.co/CgXkwSY/White-Letter-S-Logo-Instagram-Post-1.jpg" 
+                     alt="Logo"> 
+            </a>
+            <ul class="flex items-center space-x-4">
+                <li><a href="{% url 'home' %}" class="bg-purple-500 hover:bg-blue-700 py-2 px-5 border rounded-lg">Home</a></li>
+                <li><a href="{% url 'event_list' %}" class="bg-yellow-400 py-2 px-5 border rounded-lg hover:bg-blue-700">Events</a></li>
+                <li><a href="{% url 'category_list' %}" class="bg-red-500 hover:bg-blue-700 py-2 px-5 border rounded-lg">Categories</a></li>
+                <li><a href="{% url 'dashboard' %}" class="bg-blue-400 hover:bg-blue-700 py-2 px-5 border rounded-lg">Dashboard</a></li>
+                <li><a href="{% url 'participant_list' %}" class="bg-green-400 hover:bg-blue-700 py-2 px-5 border rounded-lg">Participants</a></li>
+                
+            </ul>
+        </nav>
+        
+        
+    </header>
+
+    <div class="container mx-auto py-8">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="bg-blue-600 text-white text-center py-4">
+        <p>&copy; 2025 Event Management System</p>
+    </footer>
+</body>
+</html>

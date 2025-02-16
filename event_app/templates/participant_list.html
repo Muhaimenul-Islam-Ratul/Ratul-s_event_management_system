@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Participants</h1>
+
+    <a href="{% url 'participant_create' %}" class="bg-blue-500 text-white px-4 py-2 rounded">Add Participant</a>
+
+    <table class="min-w-full bg-white shadow-md rounded mt-4">
+        <thead class="bg-gray-200">
+            <tr>
+                <th class="py-2 px-4">ID</th>
+                <th class="py-2 px-4">Name</th>
+                <th class="py-2 px-4">Email</th>
+                <th class="py-2 px-4">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr class="border-t">
+                <td class="py-2 px-4">{{ participant.id }}</td>
+                <td class="py-2 px-4">{{ participant.name }}</td>
+                <td class="py-2 px-4">{{ participant.email }}</td>
+                <td class="py-2 px-4">
+                    <a href="{% url 'participant_detail' participant.id %}" class="text-blue-500">View</a> |
+                    <a href="{% url 'participant_update' participant.id %}" class="text-yellow-500">Edit</a> |
+                    <a href="{% url 'participant_delete' participant.id %}" class="text-red-500">Delete</a> |
+                    <a href="{% url 'participant_create' %}" class="text-green-500">Create New Participant</a>
+
+                    
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center py-4">No participants found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

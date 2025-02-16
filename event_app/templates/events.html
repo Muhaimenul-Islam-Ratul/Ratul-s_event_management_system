@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Events{% endblock %}
+
+{% block content %}
+
+<div class="">
+
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'home' %}" class="mb-6 flex justify-center">
+        <input type="text" name="search" placeholder="Search events by name or location" 
+            class="px-4 py-2 border rounded-l-lg w-96" value="{{ query }}">
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700">Search</button>
+    </form>
+
+    <!--  Banner Section -->
+    <div class="relative w-full h-64 mb-8">
+        <h1 class="text-4xl font-bold text-black text-center my-5">Discover Exciting Events</h1>
+        <img src="https://i.ibb.co.com/zCdhQPf/shardayyy-photography-f-Jzm-Pe-a0e-U-unsplash.jpg" alt="Events Banner" class="w-full h-full object-cover rounded-lg">
+        
+    </div>
+
+    <!-- Upcoming Events -->
+    <h1 class="text-3xl font-bold text-center my-20">Upcoming Events</h1>
+
+    <div class="grid grid-cols-2 gap-10 px-20">
+        {% for event in events %}
+        <div class=" p-6  bg-slate-200 rounded-lg  shadow-lg">
+            <div class="event-image mb-4">
+                {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.name }}" class="w-full h-auto object-cover rounded-lg">
+                {% else %}
+                    <img src="/static/default-event-image.jpg" alt="Default Image" class="w-full h-auto object-cover rounded-lg">
+                {% endif %}
+            </div>
+            <h2 class="text-xl font-extrabold mb-10">{{ event.name }}</h2>
+            <p class="text-gray-600">{{ event.description }}</p>
+            <p><strong>Location:</strong> {{ event.location }}</p>
+            <p class= "mb-12"><strong>Category:</strong> {{ event.category.name }}</p>
+            <a href="{% url 'event_detail' event.id %}" class="mt-3 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">View Details</a>
+        </div>
+        
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

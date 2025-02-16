@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-4">Categories List</h1>
+
+    <a href="{% url 'category_create' %}" class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">
+        Create New Category
+    </a>
+
+    <table class="min-w-full bg-white border border-gray-300 mt-4">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="py-2 px-4">ID</th>
+                <th class="py-2 px-4">Name</th>
+                <th class="py-2 px-4">Description</th>
+                <th class="py-2 px-4">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr class="border-t">
+                <td class="py-2 px-4">{{ category.id }}</td>
+                <td class="py-2 px-4">{{ category.name }}</td>
+                <td class="py-2 px-4">{{ category.description }}</td>
+                <td class="py-2 px-4">
+                    <a href="{% url 'category_detail' category.id %}" class="text-blue-500">View</a> |
+                    <a href="{% url 'category_update' category.id %}" class="text-yellow-500">Edit</a> |
+                    <a href="{% url 'category_delete' category.id %}" class="text-red-500">Delete</a>
+                    
+
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center py-4">No categories found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
